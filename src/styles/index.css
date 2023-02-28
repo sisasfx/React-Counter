@@ -10,3 +10,19 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+.card{
+    height: 300px;
+    width: 200px;
+    background: black;
+    color: white;
+}
+#icon{
+    font-size: 9em;
+}
+#btn{
+    width: 10em;
+    margin-top: 2em;
+    color: white;
+    background: black;
+    border-radius: 15%;
+}
