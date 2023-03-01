@@ -15,40 +15,63 @@ let dias = 0;
 let stopCounter = true;
 
 //Function with setIterval on it
+let aumentarComponente = setInterval(() => {
+    if(segundos >= 59){
+        segundos = 0
+        minutos++
+    }else if(minutos >= 59){
+        horas++
+        minutos = 0
+    }else if(horas > 23){
+        dias++
+        horas = 0
+    }else{
+        segundos++
+    }
+    ReactDOM.render(<Counter segundos={segundos} minutos={minutos} horas={horas} dias={dias} />, document.querySelector("#app"));
+},1000)   
 
-const renderizarComponente = () => {
-    setInterval(() => {
-        if(segundos >= 59){
-            segundos = 0
-            minutos++
-        }else if(minutos >= 59){
-            horas++
-            minutos = 0
-        }else if(horas > 23){
-            dias++
-            horas = 0
-        }else{
-            segundos++
-        }
-        ReactDOM.render(<Counter segundos={segundos} minutos={minutos} horas={horas} dias={dias} />, document.querySelector("#app"));
-    },1000)
-}
-
-// Ask for boolean to change the Render status and stop counting
-const isBoolean = () =>{
-    console.log("El valor init --> ",stopCounter)
-    stopCounter = !stopCounter
-    console.log("El valor end --> ",stopCounter)
-}
-
-// RENDER -->TO FIX:  if Boolean change, doesn't affect the Render
-if(stopCounter){
+const changeBoolean = () => {
+    stopCounter ? stopCounter = false : stopCounter = true
+    console.log("ChangeBool -->"+ stopCounter) 
     renderizarComponente()
-}else{
-    ReactDOM.render(<Counter segundos={segundos} minutos={minutos} horas={horas} dias={dias}/>, document.querySelector("#app"))
 }
 
-export  {renderizarComponente, isBoolean}
+const renderizarComponente = () => { 
+    if(stopCounter){
+        console.log("START COUNTER")
+        aumentarComponente 
+    }  
+    else if(!stopCounter){
+        console.log("STOP COUNTER")
+        clearInterval(aumentarComponente)
+        console.log(minutos, segundos)
+    }
+}
+
+
+const renderizarComponenteRegresivo = () => {
+        setInterval(() => {
+            if(segundos >= 59){
+                segundos = 0
+                minutos--
+            }else if(minutos >= 59){
+                horas--
+                minutos = 0
+            }else if(horas > 23){
+                dias--
+                horas = 0
+            }else{
+                segundos--
+            }
+            ReactDOM.render(<Counter segundos={segundos} minutos={minutos} horas={horas} dias={dias} />, document.querySelector("#app"));
+        },1000)
+
+}
+
+renderizarComponente()
+
+export  {renderizarComponente, renderizarComponenteRegresivo,changeBoolean}
 
 
 

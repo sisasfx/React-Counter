@@ -1,5 +1,5 @@
 import React from "react";
-import {isBoolean} from "../index.js"
+import {renderizarComponenteRegresivo,renderizarComponente, changeBoolean} from "../index.js"
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
@@ -26,8 +26,8 @@ const Counter = (props) => {
       </div>
     </div>
     <div className="row d-flex justify-content-center">
-        <button onClick={isBoolean} id="btn">STOP</button>
-        <button onClick={isBoolean} id="btn">START</button>
+        <button onClick={changeBoolean} id="btn">START/STOP</button>
+        <button onClick={renderizarComponenteRegresivo} id="btn">REGRESIVO</button>
     </div>
     </div>
 
